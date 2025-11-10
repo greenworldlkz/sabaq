@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест 3: Тұқымды өсімдіктер / Семенные растения</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+            color: #33691e;
+            min-height: 100vh;
+            padding: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+        }
+        
+        .test-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .timer {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        
+        .back-btn i {
+            margin-right: 6px;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: #2e7d32;
+        }
+        
+        .test-content {
+            padding: 25px;
+        }
+        
+        .test-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .test-title {
+            font-size: 1.8rem;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+        
+        .test-subtitle {
+            color: #689f38;
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .language-selection {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .language-btn {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+        
+        .language-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .language-btn i {
+            margin-right: 8px;
+        }
+        
+        .test-start-screen {
+            text-align: center;
+            padding: 30px;
+            background: #f9fbf8;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .test-instructions {
+            background: #e8f5e9;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .test-instructions h3 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .test-instructions h3 i {
+            margin-right: 10px;
+        }
+        
+        .test-instructions ul {
+            padding-left: 20px;
+            margin: 15px 0;
+        }
+        
+        .test-instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .start-test-btn {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin-top: 20px;
+        }
+        
+        .start-test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+        }
+        
+        .start-test-btn i {
+            margin-right: 10px;
+        }
+        
+        .test-questions {
+            display: none;
+        }
+        
+        .question-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9fbf8;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: #558b2f;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #c5e1a5;
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option:hover {
+            background: #f1f8e9;
+        }
+        
+        .option input {
+            margin-top: 3px;
+        }
+        
+        .question-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #c5e1a5;
+            background: #f1f8e9;
+            padding: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #f1f8e9;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            border: 2px dashed #c5e1a5;
+            color: #689f38;
+        }
+        
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .test-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .control-btn {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        
+        .control-btn i {
+            margin: 0 6px;
+        }
+        
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        .control-btn.finish {
+            background: linear-gradient(135deg, #f44336, #d32f2f);
+        }
+        
+        .control-btn.finish:hover {
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
+        }
+        
+        .results-screen {
+            display: none;
+            padding: 30px;
+            background: #f9fbf8;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .results-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px;
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        .score-percent {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        
+        .score-text {
+            font-size: 1rem;
+        }
+        
+        .results-details {
+            margin-top: 30px;
+        }
+        
+        .result-item {
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .result-question {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .result-answer {
+            margin-bottom: 10px;
+        }
+        
+        .result-explanation {
+            background: #e8f5e9;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            border-left: 3px solid #4caf50;
+        }
+        
+        .correct {
+            color: #4caf50;
+            font-weight: 600;
+        }
+        
+        .incorrect {
+            color: #f44336;
+            font-weight: 600;
+        }
+        
+        .warning-message {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin: 25px 0;
+            display: none;
+        }
+        
+        .warning-message h3 {
+            color: #f57c00;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .warning-message h3 i {
+            margin-right: 8px;
+        }
+        
+        .progress-info {
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 600;
+            color: #558b2f;
+        }
+        
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 13px;
+            }
+            
+            .container {
+                border-radius: 10px;
+            }
+            
+            .test-content {
+                padding: 15px;
+            }
+            
+            .test-title {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+            
+            .test-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .test-info {
+                flex-direction: column;
+                gap: 8px;
+                width: 100%;
+            }
+            
+            .language-selection {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .language-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .test-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .control-btn {
+                width: 100%;
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                justify-content: center;
+            }
+            
+            .question-section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+            }
+            
+            .question {
+                padding: 12px;
+                margin-bottom: 20px;
+            }
+            
+            .question-text {
+                font-size: 0.95rem;
+            }
+            
+            .results-screen {
+                padding: 15px;
+            }
+            
+            .score-circle {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .score-percent {
+                font-size: 2rem;
+            }
+            
+            .score-text {
+                font-size: 0.9rem;
+            }
+            
+            .result-item {
+                padding: 12px;
+            }
+            
+            .image-placeholder {
+                height: 150px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 12px;
+            }
+            
+            .test-content {
+                padding: 12px;
+            }
+            
+            .test-title {
+                font-size: 1.2rem;
+            }
+            
+            .question-section {
+                padding: 12px;
+                margin-bottom: 15px;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .language-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .start-test-btn {
+                padding: 12px 24px;
+                font-size: 1rem;
+            }
+            
+            .score-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .score-percent {
+                font-size: 1.5rem;
+            }
+            
+            .score-text {
+                font-size: 0.8rem;
+            }
+            
+            .image-placeholder {
+                height: 120px;
+            }
+            
+            .image-placeholder i {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="#" class="logo">
+                <i class="fas fa-seedling"></i> <span id="logo-text">Жасыл әлем</span>
+            </a>
+            
+            <div class="test-info">
+                <div class="timer" id="timer">
+                    <i class="fas fa-clock"></i> <span id="time-display">60:00</span>
+                </div>
+                
+                <a href="#" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> <span id="back-text">Модульге оралу</span>
+                </a>
+            </div>
+        </header>
+        
+        <div class="test-content">
+            <div class="test-header">
+                <h1 class="test-title" id="test-title">Тест 3: Тұқымды өсімдіктер</h1>
+                <p class="test-subtitle" id="test-subtitle">Білімдеріңізді тексеру үшін тест</p>
+            </div>
+            
+            <div class="warning-message" id="warning-message">
+                <h3><i class="fas fa-exclamation-triangle"></i> <span id="warning-text">Ескерту!</span></h3>
+                <p id="warning-desc">Тест басталғаннан кейін беттен шықпаңыз. Әйтпесе, тест нәтижесі жоғалады.</p>
+            </div>
+            
+            <div class="language-selection" id="language-selection">
+                <button class="language-btn" id="kz-btn">
+                    <i class="fas fa-language"></i> <span>Қазақ тілінде тестілеу</span>
+                </button>
+                <button class="language-btn" id="ru-btn">
+                    <i class="fas fa-language"></i> <span>Тестирование на русском</span>
+                </button>
+            </div>
+            
+            <div class="test-start-screen" id="test-start-screen">
+                <div class="test-instructions">
+                    <h3><i class="fas fa-info-circle"></i> <span id="instructions-title">Тест туралы ақпарат</span></h3>
+                    <ul id="instructions-list">
+                        <li id="instruction-1">Тест 60 минутқа созылады</li>
+                        <li id="instruction-2">Тест 5 бөлімнен тұрады: А, Б, В, Г, Д</li>
+                        <li id="instruction-3">Барлығы 20 сұрақ бар</li>
+                        <li id="instruction-4">Сұрақтарға жауап бергеннен кейін, оларды өзгертуге болады</li>
+                        <li id="instruction-5">Тест аяқталғаннан кейін, нәтижелеріңізді және түсіндірмелерді көресіз</li>
+                    </ul>
+                </div>
+                
+                <button class="start-test-btn" id="start-test-btn">
+                    <i class="fas fa-play"></i> <span id="start-test-text">Тестті бастау</span>
+                </button>
+            </div>
+            
+            <div class="progress-info" id="progress-info" style="display: none;">
+                <span id="progress-text">Жауап берілген сұрақтар: <span id="answered-count">0</span> / 20</span>
+            </div>
+            
+            <div class="test-questions" id="test-questions">
+                <!-- Вопросы будут загружены через JavaScript -->
+            </div>
+            
+            <div class="test-controls" id="test-controls" style="display: none;">
+                <button class="control-btn finish" id="finish-btn">
+                    <i class="fas fa-flag-checkered"></i> <span id="finish-text">Тестті аяқтау</span>
+                </button>
+            </div>
+            
+            <div class="results-screen" id="results-screen">
+                <!-- Результаты будут загружены через JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Вопросы теста на казахском и русском языках
+        const testData = {
+            kz: {
+                title: "Тест 3: Тұқымды өсімдіктер",
+                subtitle: "Білімдеріңізді тексеру үшін тест",
+                instructions: {
+                    title: "Тест туралы ақпарат",
+                    items: [
+                        "Тест 60 минутқа созылады",
+                        "Тест 5 бөлімнен тұрады: А, Б, В, Г, Д",
+                        "Барлығы 20 сұрақтар бар",
+                        "Сұрақтарға жауап бергеннен кейін, оларды өзгертуге болады",
+                        "Тест аяқталғаннан кейін, нәтижелеріңізді және түсіндірмелерді көресіз"
+                    ]
+                },
+                startButton: "Тестті бастау",
+                warning: {
+                    title: "Ескерту!",
+                    text: "Тест басталғаннан кейін беттен шықпаңыз. Әйтпесе, тест нәтижесі жоғалады."
+                },
+                sections: [
+                    {
+                        title: "А бөлімі: Бір дұрыс жауапты таңдау сұрақтары",
+                        questions: [
+                            {
+                                text: "Тұқымды өсімдіктер екі үлкен топқа бөлінеді:",
+                                options: ["а) Мүктер мен қырыққұлақтар", "б) Ашық тұқымдылар мен жабық тұқымдылар", "в) Біржылдықтар және көпжылдықтар", "г) Дара және көп гүлділер"],
+                                correct: 1,
+                                explanation: "Тұқымды өсімдіктер негізінен тұқымның құрылымы мен орналасуына қарай екі ірі топқа бөлінеді: ашық тұқымдылар (тұқымдары қабыршақтардың үстінде ашық жатады) және жабық тұқымдылар (тұқымдары жемістердің ішінде жасырынған)."
+                            },
+                            {
+                                text: "Ашық тұқымды өсімдіклердің тұқымы...",
+                                options: ["а) Жемістердің ішінде орналасады", "б) Тұқымды жапырақшалардың (қабыршақтардың) бетінде ашық жатады", "в) Топырақта тікелей өседі", "г) Арнайы қаптамасыз"],
+                                correct: 1,
+                                explanation: "Ашық тұқымдылардың ерекшелігі - олардың тұқымдарының жабынсыз, ашық күйде дамып, шырша қабыршақтарының бетінде орналасуы. Олардың жемістері болмайды."
+                            },
+                            {
+                                text: "Ашық тұқымдылардың ең көп таралған өкілдері:",
+                                options: ["а) Мүктер", "б) Қырыққұлақтар", "в) Қылқан жапырақты ағаштар", "г) Балдырлар"],
+                                correct: 2,
+                                explanation: "Ашық тұқымдылардың көпшілігі қылқан жапырақты өсімдіктер (мысалы, қарағай, шырша, самырсын, балқарағай). Мүктер, қырыққұлақтар және балдырлар тұқымды өсімдіктер емес."
+                            },
+                            {
+                                text: "Жабық тұқымды өсімдіктердің екінші аты:",
+                                options: ["а) Споралы өсімдіктер", "б) Гүлді өсімдіктер", "в) Дара гүлділер", "г) Ашық тұқымдылар"],
+                                correct: 1,
+                                explanation: "Жабық тұқымды өсімдіктердің екінші, кең таралған атауы - 'гүлді өсімдіктер', өйткені олардың көбею мүшесі - гүл. Споралы өсімдіктерге мүктер мен қырыққұлақтар жатады."
+                            },
+                            {
+                                text: "Жабық тұқымды өсімдіктердің негізгі сипаттамалық белгісі:",
+                                options: ["а) Тұқымның жеміс ішінде болуы", "б) Тұқымның ашық орналасуы", "в) Шыршалардың болуы", "г) Талломдық құрылым"],
+                                correct: 0,
+                                explanation: "Жеміс - бұл жабық тұқымды өсімдіктердің негізгі сипаттамалық белгісі. Жеміс тұқымды қорғайды және оның таралуына көмектеседі. Талломдық құрылым балдырларға тән."
+                            },
+                            {
+                                text: "Тұқым құрамында...",
+                                options: ["а) Тек қана су және минералдар бар", "б) Эндосперм деп аталатын қоректік қор және ұрықтанған тұқым бүршігі бар", "в) Тек фотосинтезге қатысатын пигменттер бар", "г) Тек жасуша қабырғасы бар"],
+                                correct: 1,
+                                explanation: "Тұқымның негізгі бөліктері: тұқым қабығы (қорғау), эндосперм (қоректік қор) және тұқым бүршігі (жаңа өсімдіктің бастамасы). Фотосинтез пигменттері тұқымда емес, жасыл тіндерде болады."
+                            },
+                            {
+                                text: "Жоғары сатыдағы өсімдіктердің даму тарихында тұқымды өсімдіктер пайда болды...",
+                                options: ["а) Споралы өсімдіктерден кейін", "б) Споралы өсімдіктерден бұрын", "в) Балдырлармен бір уақытта", "г) Бактериялардан бұрын"],
+                                correct: 0,
+                                explanation: "Эволюцияда алдымен споралы өсімдіктер (мүктер, қырыққұлақтар), содан кейін га ғана тұқымды өсімдіктер пайда болды. Тұқым - эволюциялық жетістік ретінде қарастырылады."
+                            },
+                            {
+                                text: "Тұқымның негізгі функциясы:",
+                                options: ["а) Фотосинтез жүргізу", "б) Жаңа өсімдіктің дамуын қамтамасыз ету және оны қолайсыз жағдайлардан қорғу", "в) Тек су тасымалдау", "г) Жеміс түзу"],
+                                correct: 1,
+                                explanation: "Тұқымның негізгі рөлі - жаңа өсімдіктің дамуын қамтамасыз ету (қоректік заттар арқылы) және оны құрғақшылық, суық сияқты қолайсыз жағдайлардан қорғайтын қаңқа құру. Фотосинтез жапырақтарда жүреді."
+                            },
+                            {
+                                text: "Қарағай мен алма ағашының негізгі айырмашылығы:",
+                                options: ["а) Біреуінің жапырағы бар, екіншісінің жоқ", "б) Біреуі ашық тұқымды, ал екіншісі жабық тұқымды", "в) Біреуі өседі, екіншісі өспейді", "г) Олардың арасында айырмашылық жоқ"],
+                                correct: 1,
+                                explanation: "Қарағай - ашық тұқымды (тұқымдары шыршада ашық жатады), алма ағашы - жабық тұқымды (тұқымдары алма жемісінің ішінде). Екеуінің де жапырақтары бар, бірақ олардың құрылымы әртүрлі."
+                            },
+                            {
+                                text: "Тұқымды өсімдіктердің биологиялық маңызы:",
+                                options: ["а) Олар жер бетіндегі ең көп таралған және экологиялық тұрғыдан маңызды өсімдіктер топтарының бірі болып табылады", "б) Олар тек адам үшін маңызды", "в) Олардың табиғатта рөлі жоқ", "г) Олар тек су аймақтарында өседі"],
+                                correct: 0,
+                                explanation: "Тұқымды өсімдіктер биосферадағы негізгі өндірушілердің бірі болып табылады, оттегімен қамтамасыз етеді, көптеген жануарларға азық және мекен береді. Олар тек адам үшін ғана емес, барлық экожүйе үшін маңызды."
+                            }
+                        ]
+                    },
+                    {
+                        title: "Б бөлімі: Суреттері бар сұрақтар",
+                        questions: [
+                            {
+                                text: "Суретке назар салыңыз. Мұнда өсімдікке өмірлік маңызы бар қандай процесс көрсетілген?",
+                                options: ["а) Тыныс алу", "б) Транспирация", "в) Фотосинтез", "г) Ұрықтану"],
+                                correct: 2,
+                                explanation: "Бұл сұлба көмірқышқыл газы мен судың жарық әсерінен глюкозаға және оттегіне айналатын фотосинтез процесін анық көрсетеді.",
+                                image: "images/photosynthesis.jpg" // ЗАМЕНИТЕ НА ВАШЕ ИЗОБРАЖЕНИЕ
+                            },
+                            {
+                                text: "Суретте көрсетілген гүл шоғыры қандай түрге жатады, анықтаңыз.",
+                                options: ["а) Күміс", "б) Бота", "в) Себет", "г) Сыпыртқы"],
+                                correct: 3,
+                                explanation: "Суретте дәл осы құрылым көрініп тұр, бұл сыпыртқы гүл шоғырына сәйкес келеді.",
+                                image: "images/inflorescence.jpg" // ЗАМЕНИТЕ НА ВАШЕ ИЗОБРАЖЕНИЕ
+                            }
+                        ]
+                    },
+                    {
+                        title: "В бөлімі: Бірнеше дұрыс жауабы бар сұрақтар",
+                        questions: [
+                            {
+                                text: "Ашық тұқымды өсімдіктерге тән белгілер (3 нұсқаны таңдаңыз):",
+                                options: ["а) Тұқымдары жемістердің ішінде орналасады", "б) Көбінесе қылқан жапырақты болады", "в) Тозаңдану үшін су қажет емес", "г) Шыршалары болады", "д) Гүлдері және жемістері болады"],
+                                correct: [1, 2, 3],
+                                multiple: true,
+                                explanation: "Ашық тұқымдылардың сипаттамалары: олар негізінен қылқан жапырақты (б), тозаңдану үшін суға тәуелді емес (тозаң жел арқылы таралады) (в) және шыршалары болады (г). Олардың тұқымдары жеміс ішінде емес (а) және гүлдері жоқ (д)."
+                            },
+                            {
+                                text: "Жабық тұқымды өсімдіктердің төмендегілердің қайсысына бөлінетінін таңдаңыз (2 нұсқаны таңдаңыз):",
+                                options: ["а) Бір және екіжасушалылар", "б) Дара және қос жынысты гүлділер", "в) Біржылдықтар, екіжылдықтар және көпжылдықтар", "г) Споралы және тұқымды өсімдіктер"],
+                                correct: [0, 2],
+                                multiple: true,
+                                explanation: "Жабық тұқымды өсімдіктер негізінен тұқым бүршігіндегі бүршік жапырақшаларының санына қарай біржасушалы (1 бүршік жапырақ) және қосжасушалы (2 бүршік жапырақ) (а) деп, сондай-ақ өмір сүру ұзақтығы бойынша біржылдық, екіжылдық, көпжылдық (в) деп бөлінеді."
+                            },
+                            {
+                                text: "Тұқымның қандай артықшылықтары бар (3 нұсқаны таңдаңыз):",
+                                options: ["а) Ұрықты қолайсыз жағдайлардан сенімді қорғайды", "б) Ұрықтың дамуы үшін қоректік заттарды қамтиды", "в) Жаңа ареалдарға таралуды жеңілдетеді", "г) Фотосинтез жылдамдығын арттырады"],
+                                correct: [0, 1, 2],
+                                multiple: true,
+                                explanation: "Тұқымның артықшылықтары: ұрықты қорғайды (а), оны қоректендіреді (б) және жемістер, жел, жануарлар арқылы таралуын жеңілдетеді (в). Тұқым фотосинтез жылдамдығын тікелей арттырмайды (г), бұл жапырақтардың функциясы."
+                            }
+                        ]
+                    },
+                    {
+                        title: "Г бөлімі: 'Шын ба?' немесе 'Жалған ба?' сұрақтары",
+                        questions: [
+                            {
+                                text: "Ашық тұқымды өсімдіктердің гүлдері жоқ.",
+                                options: ["а) Шын", "б) Жалған"],
+                                correct: 0,
+                                explanation: "ШЫН. Ашық тұқымдылардың гүлдері жоқ. Олардың көбею мүшелері еркек және ұрғашы шыршалар болып табылады."
+                            },
+                            {
+                                text: "Барлық тұқымды өсімдіктер ағаштар.",
+                                options: ["а) Шын", "б) Жалған"],
+                                correct: 1,
+                                explanation: "ЖАЛҒАН. Тұқымды өсімдіктерге ағаштар ғана емес, сонымен қатар шөптер, бұталар да жатады (мысалы, бидай, қызанақ, раушан гүлі)."
+                            },
+                            {
+                                text: "Жабық тұқымды өсімдіктер эволюцияда ашық тұқымдылардан кейін пайда болды.",
+                                options: ["а) Шын", "б) Жалған"],
+                                correct: 0,
+                                explanation: "ШЫН. Эволюцияда алдымен ашық тұқымдылар, содан кейін га (мезозой дәуірінде) жабық тұқымдылар пайда болды, олар бүгіндегі флорада басым болып табылады."
+                            }
+                        ]
+                    },
+                    {
+                        title: "Д бөлімі: Қысқа жауапты сұрақтар",
+                        questions: [
+                            {
+                                text: "Тұқымды өсімдіктердің негізгі екі тобын атаңыз.",
+                                options: ["а) Ашық тұқымдылар және жабық тұқымдылар", "б) Мүктер мен қырыққұлақтар", "в) Біржылдықтар және көпжылдықтар", "г) Дара және көп гүлділер"],
+                                correct: 0,
+                                explanation: "Тұқымды өсімдіктердің негізгі екі тобы - бұл ашық тұқымдылар (Gymnospermae) және жабық тұқымдылар (Angiospermae). Бұл бөлу тұқымның даму және орналасу ерекшеліктеріне негізделген."
+                            },
+                            {
+                                text: "Тұқымның негізгі үш бөлігін атаңыз.",
+                                options: ["а) Тұқым қабығы, эндосперм, тұқым бүршігі", "б) Тамыр, сабақ, жапырақ", "в) Гүл, жеміс, тұқым", "г) Тозаң, түйін, аналық"],
+                                correct: 0,
+                                explanation: "Кез келген тұқымның негізгі үш бөлігі: 1) Тұқым қабығы - сыртқы қабық, қорғау функциясын атқарады; 2) Эндосперм - қоректік заттардың қоры; 3) Тұқым бүршігі - ұрықтанған жұмыртқа жасушасынан дамитын жаңа өсімдіктің бастамасы."
+                            }
+                        ]
+                    }
+                ],
+                buttons: {
+                    finish: "Тестті аяқтау"
+                },
+                results: {
+                    title: "Тест нәтижелері",
+                    score: "Ұпай",
+                    correct: "Дұрыс жауаптар",
+                    total: "Барлық сұрақтар",
+                    percentage: "Нәтиже",
+                    explanation: "Түсіндірме"
+                }
+            },
+            ru: {
+                title: "Тест 3: Семенные растения",
+                subtitle: "Тест для проверки ваших знаний",
+                instructions: {
+                    title: "Информация о тесте",
+                    items: [
+                        "Тест длится 60 минут",
+                        "Тест состоит из 5 частей: А, Б, В, Г, Д",
+                        "Всего 20 вопросов",
+                        "После ответа на вопросы их можно изменить",
+                        "После завершения теста вы увидите свои результаты и пояснения"
+                    ]
+                },
+                startButton: "Начать тест",
+                warning: {
+                    title: "Внимание!",
+                    text: "Не покидайте страницу после начала теста. В противном случае результаты теста будут потеряны."
+                },
+                sections: [
+                    {
+                        title: "Часть А: Вопросы с одним правильным ответом",
+                        questions: [
+                            {
+                                text: "Семенные растения делятся на две большие группы:",
+                                options: ["а) Мхи и папоротники", "б) Голосеменные и покрытосеменные", "в) Однолетники и многолетники", "г) Одноцветковые и многоцветковые"],
+                                correct: 1,
+                                explanation: "Семенные растения в основном делятся на две крупные группы в зависимости от строения и расположения семени: голосеменные (семена лежат открыто на чешуйках) и покрытосеменные (семена скрыты внутри плодов)."
+                            },
+                            {
+                                text: "Семена голосеменных растений...",
+                                options: ["а) Находятся внутри плодов", "б) Лежат открыто на поверхности семенных чешуй", "в) Прорастают прямо в почве", "г) Не имеют специальной оболочки"],
+                                correct: 1,
+                                explanation: "Особенность голосеменных в том, что их семена развиваются голыми, не имеют оболочки и расположены на поверхности чешуй шишек. У них нет плодов."
+                            },
+                            {
+                                text: "Самые распространенные представители голосеменных:",
+                                options: ["а) Мхи", "б) Папоротники", "в) Хвойные деревья", "г) Водоросли"],
+                                correct: 2,
+                                explanation: "Большинство голосеменных - это хвойные растения (например, сосна, ель, пихта, лиственница). Мхи, папоротники и водоросли не являются семенными растениями."
+                            },
+                            {
+                                text: "Другое название покрытосеменных растений:",
+                                options: ["а) Споровые растения", "б) Цветковые растения", "в) Однополые растения", "г) Голосеменные растения"],
+                                correct: 1,
+                                explanation: "Другое, широко распространенное название покрытосеменных - 'цветковые растения', так как их орган размножения - цветок. К споровым растениям относятся мхи и папоротники."
+                            },
+                            {
+                                text: "Основная характерная черта покрытосеменных растений:",
+                                options: ["а) Наличие семени внутри плода", "б) Открытое расположение семени", "в) Наличие шишек", "г) Талломное строение"],
+                                correct: 0,
+                                explanation: "Плод - это основная характеристика покрытосеменных растений. Плод защищает семя и способствует его распространению. Талломное строение характерно для водорослей."
+                            },
+                            {
+                                text: "Семя содержит...",
+                                options: ["а) Только воду и минералы", "б) Запас питательных веществ, называемый эндосперм, и зародыш", "в) Только пигменты, участвующие в фотосинтезе", "г) Только клеточную стенку"],
+                                correct: 1,
+                                explanation: "Основные части семени: семенная кожура (защита), эндосперм (запас питательных веществ) и зародыш (зачаток нового растения). Пигменты фотосинтеза находятся не в семени, а в зеленых тканях."
+                            },
+                            {
+                                text: "В истории развития высших растений семенные растения появились...",
+                                options: ["а) После споровых растений", "б) До споровых растений", "в) Одновременно с водорослями", "г) До бактерий"],
+                                correct: 0,
+                                explanation: "В эволюции сначала появились споровые растения (мхи, папоротники), и только потом - семенные. Семя считается эволюционным достижением."
+                            },
+                            {
+                                text: "Основная функция семени:",
+                                options: ["а) Осуществлять фотосинтез", "б) Обеспечить развитие нового растения и защитить его от неблагоприятных условий", "в) Только проводить воду", "г) Образовывать плод"],
+                                correct: 1,
+                                explanation: "Главная роль семени - обеспечить развитие нового растения (через питательные вещества) и создать оболочку, защищающую его от неблагоприятных условий, таких как засуха, холод. Фотосинтез происходит в листьях."
+                            },
+                            {
+                                text: "Основное различие между сосной и яблоней:",
+                                options: ["а) У одной есть листья, у другой нет", "б) Одна является голосеменной, а другая — покрытосеменной", "в) Одна растет, а другая нет", "г) Между ними нет разницы"],
+                                correct: 1,
+                                explanation: "Сосна - голосеменная (ее семена лежат открыто в шишке), яблоня - покрытосеменная (ее семена находятся внутри плода яблока). У обоих есть листья, но их строение различно."
+                            },
+                            {
+                                text: "Биологическое значение семенных растений:",
+                                options: ["а) Они являются одной из самых распространенных и экологически важных групп растений на Земле", "б) Они важны только для человека", "в) Они не играют роли в природе", "г) Они растут только в водоемах"],
+                                correct: 0,
+                                explanation: "Семенные растения являются одними из основных производителей в биосфере, обеспечивают кислородом, служат пищей и средой обитания для многих животных. Они важны не только для человека, но и для всей экосистемы."
+                            }
+                        ]
+                    },
+                    {
+                        title: "Часть Б: Вопросы с картинками",
+                        questions: [
+                            {
+                                text: "Рассмотрите изображение. Какой процесс, жизненно важный для растения, здесь показан?",
+                                options: ["а) Дыхание", "б) Транспирация", "в) Фотосинтез", "г) Оплодотворение"],
+                                correct: 2,
+                                explanation: "Эта схема наглядно изображает процесс фотосинтеза, где углекислый газ и вода под действием света преобразуются в глюкозу и кислород.",
+                                image: "images/photosynthesis.jpg" // ЗАМЕНИТЕ НА ВАШЕ ИЗОБРАЖЕНИЕ
+                            },
+                            {
+                                text: "Определите, соцветие какого типа изображено на рисунке.",
+                                options: ["а) Зонтик", "б) Початок", "в) Корзинка", "г) Кисть"],
+                                correct: 3,
+                                explanation: "На изображении видна именно эта структура, что соответствует соцветию кисть.",
+                                image: "images/inflorescence.jpg" // ЗАМЕНИТЕ НА ВАШЕ ИЗОБРАЖЕНИЕ
+                            }
+                        ]
+                    },
+                    {
+                        title: "Часть В: Вопросы с несколькими правильными ответами",
+                        questions: [
+                            {
+                                text: "Признаки, характерные для голосеменных растений (Выберите 3 варианта):",
+                                options: ["а) Их семена находятся внутри плодов", "б) Часто являются хвойными", "в) Для опыления не нуждаются в воде", "г) Имеют шишки", "д) Имеют цветки и плоды"],
+                                correct: [1, 2, 3],
+                                multiple: true,
+                                explanation: "Признаки голосеменных: они в основном хвойные (б), не зависят от воды для опыления (пыльца переносится ветром) (в) и имеют шишки (г). Их семена не внутри плодов (а) и у них нет цветков (д)."
+                            },
+                            {
+                                text: "Выберите, на какие группы делятся покрытосеменные растения (Выберите 2 варианта):",
+                                options: ["а) Однодольные и двудольные", "б) Однополые и обоеполые", "в) Однолетники, двулетники и многолетники", "г) Споровые и семенные растения"],
+                                correct: [0, 2],
+                                multiple: true,
+                                explanation: "Покрытосеменные растения делятся в первую очередь на однодольные (1 семядоля) и двудольные (2 семядоли) (а) по количеству семядолей в зародыше, а также по продолжительности жизни на однолетники, двулетники, многолетники (в)."
+                            },
+                            {
+                                text: "Какие преимущества имеет семя (Выберите 3 варианта):",
+                                options: ["а) Надежно защищает зародыш от неблагоприятных условий", "б) Содержит питательные вещества для развития зародыша", "в) Облегчает распространение на новые территории", "г) Увеличивает скорость фотосинтеза"],
+                                correct: [0, 1, 2],
+                                multiple: true,
+                                explanation: "Преимущества семени: защищает зародыш (а), питает его (б) и облегчает распространение через плоды, ветер, животных (в). Семя не увеличивает напрямую скорость фотосинтеза (г), это функция листьев."
+                            }
+                        ]
+                    },
+                    {
+                        title: "Часть Г: Вопросы 'Правда или Ложь'",
+                        questions: [
+                            {
+                                text: "У голосеменных растений нет цветков.",
+                                options: ["а) Правда", "б) Ложь"],
+                                correct: 0,
+                                explanation: "ПРАВДА. У голосеменных нет цветков. Их репродуктивными органами являются мужские и женские шишки."
+                            },
+                            {
+                                text: "Все семенные растения — это деревья.",
+                                options: ["а) Правда", "б) Ложь"],
+                                correct: 1,
+                                explanation: "ЛОЖЬ. К семенным растениям относятся не только деревья, но и травы, кустарники (например, пшеница, помидор, роза)."
+                            },
+                            {
+                                text: "Покрытосеменные растения появились в эволюции позже голосеменных.",
+                                options: ["а) Правда", "б) Ложь"],
+                                correct: 0,
+                                explanation: "ПРАВДА. В эволюции сначала появились голосеменные, и только потом (в мезозойскую эру) - покрытосеменные, которые сегодня доминируют во флоре."
+                            }
+                        ]
+                    },
+                    {
+                        title: "Часть Д: Вопросы на дополнение / Короткий ответ",
+                        questions: [
+                            {
+                                text: "Назовите две основные группы семенных растений.",
+                                options: ["а) Голосеменные и покрытосеменные", "б) Мхи и папоротники", "в) Однолетники и многолетники", "г) Одноцветковые и многоцветковые"],
+                                correct: 0,
+                                explanation: "Две основные группы семенных растений - это голосеменные (Gymnospermae) и покрытосеменные (Angiospermae). Это разделение основано на особенностях развития и расположения семени."
+                            },
+                            {
+                                text: "Назовите три основные части семени.",
+                                options: ["а) Семенная кожура, эндосперм, зародыш", "б) Корень, стебель, лист", "в) Цветок, плод, семя", "г) Пыльник, завязь, пестик"],
+                                correct: 0,
+                                explanation: "Три основные части любого семени: 1) Семенная кожура - внешняя оболочка, выполняет защитную функцию; 2) Эндосперм - запас питательных веществ; 3) Зародыш - зачаток нового растения, развивающийся из оплодотворенной яйцеклетки."
+                            }
+                        ]
+                    }
+                ],
+                buttons: {
+                    finish: "Завершить тест"
+                },
+                results: {
+                    title: "Результаты теста",
+                    score: "Баллы",
+                    correct: "Правильные ответы",
+                    total: "Всего вопросов",
+                    percentage: "Результат",
+                    explanation: "Пояснение"
+                }
+            }
+        };
+
+        // Переменные состояния
+        let currentLanguage = 'kz';
+        let userAnswers = {};
+        let testStarted = false;
+        let timeLeft = 60 * 60; // 60 минут в секундах
+        let timerInterval;
+
+        // Элементы DOM
+        const languageSelection = document.getElementById('language-selection');
+        const testStartScreen = document.getElementById('test-start-screen');
+        const testQuestions = document.getElementById('test-questions');
+        const testControls = document.getElementById('test-controls');
+        const resultsScreen = document.getElementById('results-screen');
+        const warningMessage = document.getElementById('warning-message');
+        const timerDisplay = document.getElementById('time-display');
+        const progressInfo = document.getElementById('progress-info');
+        const answeredCount = document.getElementById('answered-count');
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            setKazakhLanguage();
+        });
+
+        function setupEventListeners() {
+            document.getElementById('kz-btn').addEventListener('click', setKazakhLanguage);
+            document.getElementById('ru-btn').addEventListener('click', setRussianLanguage);
+            document.getElementById('start-test-btn').addEventListener('click', startTest);
+            document.getElementById('finish-btn').addEventListener('click', finishTest);
+            
+            // Предупреждение при попытке покинуть страницу
+            window.addEventListener('beforeunload', function(e) {
+                if (testStarted) {
+                    e.preventDefault();
+                    e.returnValue = '';
+                }
+            });
+        }
+
+        function setKazakhLanguage() {
+            currentLanguage = 'kz';
+            updateLanguageUI();
+        }
+
+        function setRussianLanguage() {
+            currentLanguage = 'ru';
+            updateLanguageUI();
+        }
+
+        function updateLanguageUI() {
+            const data = testData[currentLanguage];
+            
+            // Обновление текстов интерфейса
+            document.getElementById('test-title').textContent = data.title;
+            document.getElementById('test-subtitle').textContent = data.subtitle;
+            document.getElementById('instructions-title').textContent = data.instructions.title;
+            document.getElementById('start-test-text').textContent = data.startButton;
+            document.getElementById('warning-text').textContent = data.warning.title;
+            document.getElementById('warning-desc').textContent = data.warning.text;
+            document.getElementById('finish-text').textContent = data.buttons.finish;
+            document.getElementById('back-text').textContent = currentLanguage === 'kz' ? 'Модульге оралу' : 'Вернуться к модулю';
+            document.getElementById('logo-text').textContent = currentLanguage === 'kz' ? 'Жасыл әлем' : 'Зеленый мир';
+            document.getElementById('progress-text').textContent = currentLanguage === 'kz' 
+                ? 'Жауап берілген сұрақтар:' 
+                : 'Отвеченные вопросы:';
+            
+            // Обновление инструкций
+            const instructionsList = document.getElementById('instructions-list');
+            instructionsList.innerHTML = '';
+            data.instructions.items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                instructionsList.appendChild(li);
+            });
+            
+            // Если тест уже начат, перезагружаем вопросы
+            if (testStarted) {
+                loadQuestions();
+            }
+        }
+
+        function startTest() {
+            testStarted = true;
+            testStartScreen.style.display = 'none';
+            languageSelection.style.display = 'none';
+            testQuestions.style.display = 'block';
+            testControls.style.display = 'flex';
+            warningMessage.style.display = 'block';
+            progressInfo.style.display = 'block';
+            
+            // Запуск таймера
+            startTimer();
+            
+            // Загрузка вопросов
+            loadQuestions();
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(function() {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    finishTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Изменение цвета при малом времени
+            if (timeLeft < 300) { // 5 минут
+                timerDisplay.style.color = '#f44336';
+            }
+        }
+
+        function loadQuestions() {
+            const data = testData[currentLanguage];
+            testQuestions.innerHTML = '';
+            
+            // Создание секций и вопросов
+            data.sections.forEach((section, sectionIndex) => {
+                const sectionElement = document.createElement('div');
+                sectionElement.className = 'question-section';
+                
+                const sectionTitle = document.createElement('h2');
+                sectionTitle.className = 'section-title';
+                sectionTitle.textContent = section.title;
+                sectionElement.appendChild(sectionTitle);
+                
+                section.questions.forEach((question, questionIndex) => {
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'question';
+                    questionElement.id = `q-${sectionIndex}-${questionIndex}`;
+                    
+                    const questionText = document.createElement('div');
+                    questionText.className = 'question-text';
+                    questionText.textContent = `${sectionIndex * 10 + questionIndex + 1}. ${question.text}`;
+                    questionElement.appendChild(questionText);
+                    
+                    // Добавление изображения для вопросов с картинками
+                    if (question.image) {
+                        const img = document.createElement('img');
+                        img.src = question.image;
+                        img.alt = currentLanguage === 'kz' ? 'Сұрақ суреті' : 'Изображение для вопроса';
+                        img.className = 'question-image';
+                        img.onerror = function() {
+                            // Если изображение не загружается, показываем заполнитель
+                            this.style.display = 'none';
+                            const placeholder = document.createElement('div');
+                            placeholder.className = 'image-placeholder';
+                            
+                            const icon = document.createElement('i');
+                            icon.className = 'fas fa-image';
+                            
+                            const placeholderText = document.createElement('p');
+                            placeholderText.textContent = currentLanguage === 'kz' 
+                                ? 'Сурет жүктелмеді' 
+                                : 'Изображение не загружено';
+                            
+                            placeholder.appendChild(icon);
+                            placeholder.appendChild(placeholderText);
+                            questionElement.appendChild(placeholder);
+                        };
+                        questionElement.appendChild(img);
+                    }
+                    
+                    const optionsContainer = document.createElement('div');
+                    optionsContainer.className = 'options';
+                    
+                    question.options.forEach((option, optionIndex) => {
+                        const optionElement = document.createElement('label');
+                        optionElement.className = 'option';
+                        
+                        const input = document.createElement('input');
+                        input.type = question.multiple ? 'checkbox' : 'radio';
+                        input.name = `q-${sectionIndex}-${questionIndex}`;
+                        input.value = optionIndex;
+                        
+                        // Восстановление ответов пользователя
+                        const answerKey = `${sectionIndex}-${questionIndex}`;
+                        if (userAnswers[answerKey]) {
+                            if (question.multiple) {
+                                if (userAnswers[answerKey].includes(optionIndex)) {
+                                    input.checked = true;
+                                }
+                            } else {
+                                if (userAnswers[answerKey] === optionIndex) {
+                                    input.checked = true;
+                                }
+                            }
+                        }
+                        
+                        input.addEventListener('change', function() {
+                            saveAnswer(sectionIndex, questionIndex, optionIndex, question.multiple);
+                            updateProgress();
+                        });
+                        
+                        optionElement.appendChild(input);
+                        
+                        const optionText = document.createElement('span');
+                        optionText.textContent = option;
+                        optionElement.appendChild(optionText);
+                        
+                        optionsContainer.appendChild(optionElement);
+                    });
+                    
+                    questionElement.appendChild(optionsContainer);
+                    sectionElement.appendChild(questionElement);
+                });
+                
+                testQuestions.appendChild(sectionElement);
+            });
+            
+            updateProgress();
+        }
+
+        function saveAnswer(sectionIndex, questionIndex, optionIndex, isMultiple) {
+            const answerKey = `${sectionIndex}-${questionIndex}`;
+            
+            if (isMultiple) {
+                if (!userAnswers[answerKey]) {
+                    userAnswers[answerKey] = [];
+                }
+                
+                if (userAnswers[answerKey].includes(optionIndex)) {
+                    // Удаление ответа, если он уже выбран
+                    userAnswers[answerKey] = userAnswers[answerKey].filter(i => i !== optionIndex);
+                } else {
+                    // Добавление ответа
+                    userAnswers[answerKey].push(optionIndex);
+                }
+            } else {
+                userAnswers[answerKey] = optionIndex;
+            }
+        }
+
+        function updateProgress() {
+            let answered = 0;
+            const totalQuestions = 20;
+            
+            // Подсчет отвеченных вопросов
+            for (let i = 0; i < totalQuestions; i++) {
+                const sectionIndex = Math.floor(i / 10);
+                const questionIndex = i % 10;
+                const answerKey = `${sectionIndex}-${questionIndex}`;
+                
+                if (userAnswers[answerKey]) {
+                    if (Array.isArray(userAnswers[answerKey])) {
+                        if (userAnswers[answerKey].length > 0) {
+                            answered++;
+                        }
+                    } else {
+                        answered++;
+                    }
+                }
+            }
+            
+            answeredCount.textContent = answered;
+        }
+
+        function finishTest() {
+            clearInterval(timerInterval);
+            testQuestions.style.display = 'none';
+            testControls.style.display = 'none';
+            progressInfo.style.display = 'none';
+            resultsScreen.style.display = 'block';
+            
+            showResults();
+        }
+
+        function showResults() {
+            const data = testData[currentLanguage];
+            let correctCount = 0;
+            let totalQuestions = 0;
+            
+            resultsScreen.innerHTML = `
+                <div class="results-header">
+                    <h2>${data.results.title}</h2>
+                    <div class="score-circle">
+                        <div class="score-percent" id="score-percent">0%</div>
+                        <div class="score-text">${data.results.percentage}</div>
+                    </div>
+                    <p id="score-details">${data.results.correct}: 0 / ${data.results.total}: 20</p>
+                </div>
+                <div class="results-details" id="results-details"></div>
+            `;
+            
+            const resultsDetails = document.getElementById('results-details');
+            
+            // Проверка ответов и подсчет результатов
+            data.sections.forEach((section, sectionIndex) => {
+                section.questions.forEach((question, questionIndex) => {
+                    totalQuestions++;
+                    const answerKey = `${sectionIndex}-${questionIndex}`;
+                    const userAnswer = userAnswers[answerKey];
+                    let isCorrect = false;
+                    
+                    if (question.multiple) {
+                        // Для вопросов с несколькими правильными ответами
+                        if (userAnswer && Array.isArray(userAnswer) && 
+                            userAnswer.length === question.correct.length &&
+                            userAnswer.every(val => question.correct.includes(val))) {
+                            isCorrect = true;
+                            correctCount++;
+                        }
+                    } else {
+                        // Для вопросов с одним правильным ответом
+                        if (userAnswer === question.correct) {
+                            isCorrect = true;
+                            correctCount++;
+                        }
+                    }
+                    
+                    // Создание элемента результата
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'result-item';
+                    
+                    const questionText = document.createElement('div');
+                    questionText.className = 'result-question';
+                    questionText.textContent = `${totalQuestions}. ${question.text}`;
+                    resultItem.appendChild(questionText);
+                    
+                    // Добавление изображения в результаты, если оно есть
+                    if (question.image) {
+                        const resultImg = document.createElement('img');
+                        resultImg.src = question.image;
+                        resultImg.alt = currentLanguage === 'kz' ? 'Сұрақ суреті' : 'Изображение для вопроса';
+                        resultImg.className = 'question-image';
+                        resultImg.style.maxWidth = '300px';
+                        resultImg.onerror = function() {
+                            this.style.display = 'none';
+                        };
+                        resultItem.appendChild(resultImg);
+                    }
+                    
+                    const answerStatus = document.createElement('div');
+                    answerStatus.className = isCorrect ? 'correct' : 'incorrect';
+                    answerStatus.textContent = isCorrect 
+                        ? (currentLanguage === 'kz' ? '✓ Дұрыс' : '✓ Правильно') 
+                        : (currentLanguage === 'kz' ? '✗ Қате' : '✗ Неправильно');
+                    resultItem.appendChild(answerStatus);
+                    
+                    const explanation = document.createElement('div');
+                    explanation.className = 'result-explanation';
+                    explanation.textContent = question.explanation;
+                    resultItem.appendChild(explanation);
+                    
+                    resultsDetails.appendChild(resultItem);
+                });
+            });
+            
+            // Обновление итогового счета
+            const scorePercent = Math.round((correctCount / totalQuestions) * 100);
+            document.getElementById('score-percent').textContent = `${scorePercent}%`;
+            document.getElementById('score-details').textContent = 
+                `${data.results.correct}: ${correctCount} / ${data.results.total}: ${totalQuestions}`;
+            
+            // Прокрутка к началу результатов
+            resultsScreen.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+</body>
+</html>
