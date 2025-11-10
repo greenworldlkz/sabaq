@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Модуль 2 - Төменгі және жоғары сатыдағы өсімдіктер</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #e8f5e9, #c8e6c9);
+            color: #33691e;
+            min-height: 100vh;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+        }
+        
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .logo i {
+            margin-right: 8px;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .language-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 3px;
+        }
+        
+        .language-btn {
+            padding: 5px 14px;
+            border: none;
+            background: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .language-btn.active {
+            background: white;
+            color: #2e7d32;
+        }
+        
+        .media-controls {
+            display: flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 18px;
+            padding: 3px;
+        }
+        
+        .media-btn {
+            padding: 6px 14px;
+            border: none;
+            background: none;
+            border-radius: 14px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .media-btn.active {
+            background: white;
+            color: #2e7d32;
+        }
+        
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .back-btn i {
+            margin-right: 6px;
+        }
+        
+        .back-btn:hover {
+            background: white;
+            color: #2e7d32;
+        }
+        
+        .module-content {
+            padding: 30px;
+        }
+        
+        .module-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .module-title {
+            font-size: 1.8rem;
+            color: #2e7d32;
+            margin-bottom: 12px;
+        }
+        
+        .module-subtitle {
+            color: #689f38;
+            font-size: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        
+        .content-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f9fbf8;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            color: #558b2f;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #c5e1a5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title i {
+            margin-right: 10px;
+            color: #4caf50;
+        }
+        
+        .section-content {
+            line-height: 1.6;
+            font-size: 1rem;
+            color: #333;
+        }
+        
+        .section-content p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        .important-note {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .important-note h4 {
+            color: #2e7d32;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        
+        .important-note h4 i {
+            margin-right: 8px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #c5e1a5;
+        }
+        
+        .comparison-table th {
+            background: #4caf50;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background: #f1f8e9;
+        }
+        
+        /* Стили для медиа-контента */
+        .media-content {
+            display: none;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .media-content.active {
+            display: block;
+        }
+        
+        .presentation-container, .video-container {
+            background: #f1f8e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .presentation-frame, .video-frame {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 6px;
+            background: white;
+        }
+        
+        .media-title {
+            font-size: 1.2rem;
+            color: #2e7d32;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        /* Стили для кнопки тестирования */
+        .test-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .test-title {
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .test-description {
+            color: #fff3e0;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .test-btn {
+            background: white;
+            color: #f57c00;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .test-btn i {
+            margin-right: 8px;
+        }
+        
+        .test-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .nav-btn i {
+            margin: 0 6px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            margin-top: 30px;
+        }
+        
+        .author {
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        /* Мобильная версия - улучшенная адаптивность */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                border-radius: 10px;
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+                padding: 12px;
+            }
+            
+            .header-controls {
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+            }
+            
+            .media-controls, .language-switcher {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .module-content {
+                padding: 20px 15px;
+            }
+            
+            .module-title {
+                font-size: 1.5rem;
+            }
+            
+            .module-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .content-section {
+                padding: 15px;
+                margin-bottom: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.2rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .section-content {
+                font-size: 0.9rem;
+            }
+            
+            .important-note {
+                padding: 12px;
+            }
+            
+            .important-note h4 {
+                font-size: 1rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 8px 10px;
+            }
+            
+            .presentation-frame, .video-frame {
+                height: 250px;
+            }
+            
+            .media-title {
+                font-size: 1.1rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .test-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .test-title {
+                font-size: 1.3rem;
+            }
+            
+            .test-description {
+                font-size: 0.9rem;
+            }
+            
+            .test-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 10px 15px;
+            }
+        }
+        
+        /* Очень маленькие экраны (до 480px) */
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                border-radius: 8px;
+            }
+            
+            .module-content {
+                padding: 15px 10px;
+            }
+            
+            .module-title {
+                font-size: 1.3rem;
+            }
+            
+            .module-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .content-section {
+                padding: 12px;
+            }
+            
+            .section-title {
+                font-size: 1.1rem;
+            }
+            
+            .section-content {
+                font-size: 0.85rem;
+            }
+            
+            .comparison-table {
+                font-size: 0.75rem;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 6px 8px;
+            }
+            
+            .presentation-frame, .video-frame {
+                height: 200px;
+            }
+            
+            .media-title {
+                font-size: 1rem;
+            }
+            
+            .test-section {
+                padding: 15px;
+            }
+            
+            .test-title {
+                font-size: 1.1rem;
+            }
+            
+            .test-description {
+                font-size: 0.85rem;
+            }
+            
+            .test-btn {
+                padding: 8px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            footer {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Стили для карточек в колонку на мобильных */
+        @media (max-width: 768px) {
+            .content-section {
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .section-content ul {
+                padding-left: 20px;
+            }
+            
+            .section-content li {
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="modules.html" class="logo">
+                <i class="fas fa-leaf"></i> <span id="logo-text">Жасыл әлем</span>
+            </a>
+            
+            <div class="header-controls">
+                <div class="media-controls">
+                    <button class="media-btn" id="text-btn">
+                        <i class="fas fa-book"></i> <span id="text-btn-text">Мәтін</span>
+                    </button>
+                    <button class="media-btn" id="presentation-btn">
+                        <i class="fas fa-desktop"></i> <span id="presentation-btn-text">Презентация</span>
+                    </button>
+                    <button class="media-btn" id="video-btn">
+                        <i class="fas fa-play-circle"></i> <span id="video-btn-text">Видео</span>
+                    </button>
+                </div>
+                
+                <div class="language-switcher">
+                    <button class="language-btn" id="ru-btn">Рус</button>
+                    <button class="language-btn active" id="kz-btn">Қаз</button>
+                </div>
+            </div>
+            
+            <a href="modules.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> <span id="back-text">Модульдер тізімі</span>
+            </a>
+        </header>
+        
+        <div class="module-content">
+            <div class="module-header">
+                <h1 class="module-title" id="module-title">Модуль 2: Төменгі және жоғары сатыдағы өсімдіктер</h1>
+                <p class="module-subtitle" id="module-subtitle">Өсімдіктердің эволюциялық дамуы, төменгі және жоғары сатыдағы өсімдіктердің ерекшеліктері</p>
+            </div>
+            
+            <!-- Текстовый контент (по умолчанию активен) -->
+            <div class="text-content media-content active">
+                <div class="content-section">
+                    <h2 class="section-title"><i class="fas fa-seedling"></i> <span id="section1-title">Төменгі сатыдағы өсімдіктер</span></h2>
+                    <div class="section-content">
+                        <p id="section1-p1">Төменгі сатыдағы өсімдіктер - бұл қарапайым құрылымды, негізінен сулы ортада тіршілік ететін өсімдіктер. Оларға балдырлар, мүктер, қыналар және қына тәрізділер жатады.</p>
+                        
+                        <div class="important-note">
+                            <h4><i class="fas fa-lightbulb"></i> <span id="important-note1">Негізгі ерекшеліктері</span></h4>
+                            <p id="important-note1-text">Төменгі сатыдағы өсімдіктердің негізгі ерекшелігі - олардың денесі тіндерге бөлінбеген талломдық құрылымға ие болуы. Олардың тамыр, сабақ, жапырақ сияқты айқын органдары болмайды.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h2 class="section-title"><i class="fas fa-microscope"></i> <span id="section2-title">Жоғары сатыдағы өсімдіктер</span></h2>
+                    <div class="section-content">
+                        <p id="section2-p1">Жоғары сатыдағы өсімдіктер - бұл күрделі құрылымды, тіндерге жіктелген, арнайы органдары бар өсімдіктер. Оларға қырыққұлақтар, ашық тұқымдылар және жабық тұқымдылар жатады.</p>
+                        
+                        <ul id="section2-list">
+                            <li>Органдарға бөлінген: тамыр, сабақ, жапырақ</li>
+                            <li>Тіндері маманданған: өсу, тасымалдау, қорғаныш тіндері</li>
+                            <li>Көбею жүйесі дамыған: споралар немесе тұқымдар арқылы көбейеді</li>
+                            <li>Көпшілігі құрлықта тіршілік етеді</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h2 class="section-title"><i class="fas fa-layer-group"></i> <span id="section3-title">Төменгі және жоғары сатыдағы өсімдіктерді салыстыру</span></h2>
+                    <div class="section-content">
+                        <p id="section3-p1">Төменгі және жоғары сатыдағы өсімдіктердің негізгі айырмашылықтары:</p>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th id="table-header1">Сипаттама</th>
+                                    <th id="table-header2">Төменгі сатыдағы өсімдіктер</th>
+                                    <th id="table-header3">Жоғары сатыдағы өсімдіктер</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="table1-cell1">Дене құрылымы</td>
+                                    <td id="table1-cell2">Талломдық (тендерге бөлінбеген)</td>
+                                    <td id="table1-cell3">Органдық (тендерге бөлінген)</td>
+                                </tr>
+                                <tr>
+                                    <td id="table2-cell1">Негізгі өкілдері</td>
+                                    <td id="table2-cell2">Балдырлар, мүктер, қыналар</td>
+                                    <td id="table2-cell3">Қырыққұлақтар, ашық және жабық тұқымдылар</td>
+                                </tr>
+                                <tr>
+                                    <td id="table3-cell1">Тіршілік ортасы</td>
+                                    <td id="table3-cell2">Негізінен сулы орта</td>
+                                    <td id="table3-cell3">Негізінен құрлық</td>
+                                </tr>
+                                <tr>
+                                    <td id="table4-cell1">Көбею тәсілі</td>
+                                    <td id="table4-cell2">Негізінен вегетативті және споралар арқылы</td>
+                                    <td id="table4-cell3">Споралар немесе тұқымдар арқылы</td>
+                                </tr>
+                                <tr>
+                                    <td id="table5-cell1">Тамыр жүйесі</td>
+                                    <td id="table5-cell2">Жоқ (ризоидтар бар)</td>
+                                    <td id="table5-cell3">Дамыған тамыр жүйесі</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="content-section">
+                    <h2 class="section-title"><i class="fas fa-balance-scale"></i> <span id="section4-title">Эволюциялық даму</span></h2>
+                    <div class="section-content">
+                        <p id="section4-p1">Өсімдіктердің эволюциялық дамуы сулы ортадан құрлыққа шығу бағытында болды. Бұл үдерісте өсімдіктер күрделірек құрылымдар дамытып, жаңа бейімделушіліктерге ие болды:</p>
+                        
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th id="table2-header1">Эволюциялық кезең</th>
+                                    <th id="table2-header2">Негізгі ерекшеліктері</th>
+                                    <th id="table2-header3">Өкілдері</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td id="table2-1-cell1">Алғашқы өсімдіктер</td>
+                                    <td id="table2-1-cell2">Суда тіршілік ету, қарапайым құрылым</td>
+                                    <td id="table2-1-cell3">Жасыл балдырлар</td>
+                                </tr>
+                                <tr>
+                                    <td id="table2-2-cell1">Су-құрлық өсімдіктері</td>
+                                    <td id="table2-2-cell2">Сулы ортадан құрлыққа бейімделу</td>
+                                    <td id="table2-2-cell3">Мүктер, қыналар</td>
+                                </tr>
+                                <tr>
+                                    <td id="table2-3-cell1">Ашық тұқымдылар</td>
+                                    <td id="table2-3-cell2">Тұқым арқылы көбею, дамыған мүшелер</td>
+                                    <td id="table2-3-cell3">Қылқан жапырақтылар</td>
+                                </tr>
+                                <tr>
+                                    <td id="table2-4-cell1">Жабық тұқымдылар</td>
+                                    <td id="table2-4-cell2">Гүлді өсімдіктер, жеміс пен тұқым жасушаларда</td>
+                                    <td id="table2-4-cell3">Көптеген гүлді өсімдіктер</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Секция с тестом -->
+                <div class="test-section">
+                    <h3 class="test-title">
+                        <i class="fas fa-tasks"></i> 
+                        <span id="test-title">Біліміңізді тексеріңіз!</span>
+                    </h3>
+                    <p class="test-description" id="test-description">
+                        Осы модуль бойынша біліміңізді тексеру үшін тестілеуге қатысыңыз. Сіз 10 сұраққа жауап беріп, өзіңіздің білім деңгейіңізді бағалай аласыз.
+                    </p>
+                    <a href="https://wayground.com/join?gc=48922794" class="test-btn" id="test-btn" target="_blank">
+                        <i class="fas fa-play"></i> <span id="test-btn-text">Тестілеуді бастау</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Контент презентации -->
+            <div class="presentation-content media-content">
+                <div class="presentation-container">
+                    <h3 class="media-title">
+                        <i class="fas fa-desktop"></i> 
+                        <span id="presentation-title">Төменгі және жоғары сатыдағы өсімдіктер презентациясы</span>
+                    </h3>
+                    <iframe class="presentation-frame" id="presentation-frame" 
+                            src="https://docs.google.com/presentation/d/1oU0bYyFycrIh03xVYWlFpvCavSWxFTFetxk8Pkudk6s/embed?start=false&loop=false&delayms=3000" 
+                            frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+                    </iframe>
+                </div>
+            </div>
+            
+            <!-- Видео контент -->
+            <div class="video-content media-content">
+                <div class="video-container">
+                    <h3 class="media-title">
+                        <i class="fas fa-play-circle"></i> 
+                        <span id="video-title">Төменгі және жоғары сатыдағы өсімдіктер бойынша видео сабақ</span>
+                    </h3>
+                    <iframe class="video-frame" id="video-frame" 
+                            src="https://youtu.be/qeMFqkcPYcg?si=hqMs-mo7LIGgbPCB" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                    </iframe>
+                    <p id="video-description" style="margin-top: 15px; color: #666; font-style: italic;">
+                        Бұл бейне сабақта төменгі және жоғары сатыдағы өсімдіктердің ерекшеліктері мен айырмашылықтары қарастырылады.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="navigation-buttons">
+                <a href="module1.html" class="nav-btn">
+                    <i class="fas fa-arrow-left"></i> <span id="prev-btn">Алдыңғы модуль</span>
+                </a>
+                <a href="module3.html" class="nav-btn">
+                    <span id="next-btn">Келесі модуль</span> <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>7-сыныпқа арналған биологияны оқыту платформасы | <span class="author">Автор</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Тексты на казахском
+        const kzTexts = {
+            logo: "Жасыл әлем",
+            back: "Модульдер тізімі",
+            title: "Модуль 2: Төменгі және жоғары сатыдағы өсімдіктер",
+            subtitle: "Өсімдіктердің эволюциялық дамуы, төменгі және жоғары сатыдағы өсімдіктердің ерекшеліктері",
+            section1: "Төменгі сатыдағы өсімдіктер",
+            section1p1: "Төменгі сатыдағы өсімдіктер - бұл қарапайым құрылымды, негізінен сулы ортада тіршілік ететін өсімдіктер. Оларға балдырлар, мүктер, қыналар және қына тәрізділер жатады.",
+            note1: "Негізгі ерекшеліктері",
+            note1text: "Төменгі сатыдағы өсімдіктердің негізгі ерекшелігі - олардың денесі тіндерге бөлінбеген талломдық құрылымғa ие болуы. Олардың тамыр, сабақ, жапырақ сияқты айқын органдары болмайды.",
+            section2: "Жоғары сатыдағы өсімдіктер",
+            section2p1: "Жоғары сатыдағы өсімдіктер - бұл күрделі құрылымды, тіндерге жіктелген, арнайы органдары бар өсімдіктер. Оларғa қырыққұлақтар, ашық тұқымдылар және жабық тұқымдылар жатады.",
+            section2list: [
+                "Органдарға бөлінген: тамыр, сабақ, жапырақ",
+                "Тіндері маманданған: өсу, тасымалдау, қорғаныш тіндері",
+                "Көбею жүйесі дамыған: споралар немесе тұқымдар арқылы көбейеді",
+                "Көпшілігі құрлықта тіршілік етеді"
+            ],
+            section3: "Төменгі және жоғары сатыдағы өсімдіктерді салыстыру",
+            section3p1: "Төменгі және жоғары сатыдағы өсімдіктердің негізгі айырмашылықтары:",
+            table1h1: "Сипаттама",
+            table1h2: "Төменгі сатыдағы өсімдіктер",
+            table1h3: "Жоғары сатыдағы өсімдіктер",
+            table1: [
+                ["Дене құрылымы", "Талломдық (тендерге бөлінбеген)", "Органдық (тендерге бөлінген)"],
+                ["Негізгі өкілдері", "Балдырлар, мүктер, қыналар", "Қырыққұлақтар, ашық және жабық тұқымдылар"],
+                ["Тіршілік ортасы", "Негізінен сулы орта", "Негізінен құрлық"],
+                ["Көбею тәсілі", "Негізінен вегетативті және споралар арқылы", "Споралар немесе тұқымдар арқылы"],
+                ["Тамыр жүйесі", "Жоқ (ризоидтар бар)", "Дамыған тамыр жүйесі"]
+            ],
+            section4: "Эволюциялық даму",
+            section4p1: "Өсімдіктердің эволюциялық дамуы сулы ортадан құрлыққа шығу бағытында болды. Бұл үдерісте өсімдіктер күрделірек құрылымдар дамытып, жаңа бейімделушіліктерге ие болды:",
+            table2h1: "Эволюциялық кезең",
+            table2h2: "Негізгі ерекшеліктері",
+            table2h3: "Өкілдері",
+            table2: [
+                ["Алғашқы өсімдіктер", "Суда тіршілік ету, қарапайым құрылым", "Жасыл балдырлар"],
+                ["Су-құрлық өсімдіктері", "Сулы ортадан құрлыққа бейімделу", "Мүктер, қыналар"],
+                ["Ашық тұқымдылар", "Тұқым арқылы көбею, дамыған мүшелер", "Қылқан жапырақтылар"],
+                ["Жабық тұқымдылар", "Гүлді өсімдіклер, жеміс пен тұқым жасушаларда", "Көптеген гүлді өсімдіктер"]
+            ],
+            prevBtn: "Алдыңғы модуль",
+            nextBtn: "Келесі модуль",
+            textBtn: "Мәтін",
+            presentationBtn: "Презентация",
+            videoBtn: "Видео",
+            presentationTitle: "Төменгі және жоғары сатыдағы өсімдіктер презентациясы",
+            videoTitle: "Төменгі және жоғары сатыдағы өсімдіктер бойынша видео сабақ",
+            videoDescription: "Бұл бейне сабақта төменгі және жоғары сатыдағы өсімдіктердің ерекшеліктері мен айырмашылықтары қарастырылады.",
+            kzPresentation: "https://docs.google.com/presentation/d/1oU0bYyFycrIh03xVYWlFpvCavSWxFTFetxk8Pkudk6s/embed?start=false&loop=false&delayms=3000",
+            ruPresentation: "https://docs.google.com/presentation/d/1NIhYXwR7p999qUtJAZXIv2Xp5Vjw5ux4-cP2wwXKP00/embed?start=false&loop=false&delayms=3000",
+            kzVideo: "https://youtu.be/qeMFqkcPYcg?si=hqMs-mo7LIGgbPCB",
+            ruVideo: "https://youtu.be/qeMFqkcPYcg?si=hqMs-mo7LIGgbPCB",
+            // Тексты для теста
+            testTitle: "Біліміңізді тексеріңіз!",
+            testDescription: "Осы модуль бойынша біліміңізді тексеру үшін тестілеуге қатысыңыз. Сіз 5 сұраққа жауап беріп, өзіңіздің білім деңгейіңізді бағалай аласыз.",
+            testBtnText: "Тестілеуді бастау",
+            testLink: "https://wayground.com/join?gc=48922794"
+        };
+        
+        // Тексты на русском
+        const ruTexts = {
+            logo: "Зеленый мир",
+            back: "Список модулей",
+            title: "Модуль 2: Низшие и высшие растения",
+            subtitle: "Эволюционное развитие растений, особенности низших и высших растений",
+            section1: "Низшие растения",
+            section1p1: "Низшие растения - это простые по структуре растения, обитающие преимущественно в водной среде. К ним относятся водоросли, мхи, лишайники и подобные им организмы.",
+            note1: "Основные особенности",
+            note1text: "Основная особенность низших растений - их тело имеет талломную структуру, не разделенную на ткани. У них нет четко выраженных органов, таких как корень, стебель, лист.",
+            section2: "Высшие растения",
+            section2p1: "Высшие растения - это сложноустроенные растения с дифференцированными тканями и специализированными органами. К ним относятся папоротники, голосеменные и покрытосеменные растения.",
+            section2list: [
+                "Разделены на органы: корень, стебель, лист",
+                "Имеют специализированные ткани: образовательные, проводящие, защитные",
+                "Развитая система размножения: размножаются спорами или семенами",
+                "Большинство обитает на суше"
+            ],
+            section3: "Сравнение низших и высших растений",
+            section3p1: "Основные различия между низших и высших растений:",
+            table1h1: "Характеристика",
+            table1h2: "Низшие растения",
+            table1h3: "Высшие растения",
+            table1: [
+                ["Строение тела", "Талломное (не разделено на ткани)", "Органное (разделено на ткани)"],
+                ["Основные представители", "Водоросли, мхи, лишайники", "Папоротники, голосеменные и покрытосеменные"],
+                ["Среда обитания", "Преимущественно водная среда", "Преимущественно суша"],
+                ["Способ размножения", "В основном вегетативный и с помощью спор", "Спорами или семенами"],
+                ["Корневая система", "Отсутствует (имеются ризоиды)", "Развитая корневая система"]
+            ],
+            section4: "Эволюционное развитие",
+            section4p1: "Эволюционное развитие растений происходило в направлении от водной среды к суше. В этом процессе растения развивали более сложные структуры и приобретали новые адаптации:",
+            table2h1: "Эволюционный этап",
+            table2h2: "Основные особенности",
+            table2h3: "Представители",
+            table2: [
+                ["Первые растения", "Обитание в воде, простое строение", "Зеленые водоросли"],
+                ["Водно-наземные растения", "Адаптация от водной среды к суше", "Мхи, лишайники"],
+                ["Голосеменные", "Размножение семенами, развитые органы", "Хвойные растения"],
+                ["Покрытосеменные", "Цветковые растения, плоды и семена в завязи", "Многие цветковые растения"]
+            ],
+            prevBtn: "Предыдущий модуль",
+            nextBtn: "Следующий модуль",
+            textBtn: "Текст",
+            presentationBtn: "Презентация",
+            videoBtn: "Видео",
+            presentationTitle: "Презентация по низшим и высшим растениям",
+            videoTitle: "Видеоурок по низшим и высшим растениям",
+            videoDescription: "В этом видеоуроке рассматриваются особенности и различия низших и высших растений.",
+            kzPresentation: "https://docs.google.com/presentation/d/1oU0bYyFycrIh03xVYWlFpvCavSWxFTFetxk8Pkudk6s/embed?start=false&loop=false&delayms=3000",
+            ruPresentation: "https://docs.google.com/presentation/d/1NIhYXwR7p999qUtJAZXIv2Xp5Vjw5ux4-cP2wwXKP00/embed?start=false&loop=false&delayms=3000",
+            kzVideo: "https://youtu.be/qeMFqkcPYcg?si=hqMs-mo7LIGgbPCB",
+            ruVideo: "https://youtu.be/qeMFqkcPYcg?si=hqMs-mo7LIGgbPCB",
+            // Тексты для теста
+            testTitle: "Проверь себя!",
+            testDescription: "Пройдите тестирование, чтобы проверить свои знания по этому модулю. Вы ответите на 5 вопросов и сможете оценить свой уровень знаний.",
+            testBtnText: "Начать тестирование",
+            testLink: "https://wayground.com/join?gc=14188714"
+        };
+        
+        // Установка казахского языка по умолчанию
+        function setKazakhLanguage() {
+            document.documentElement.lang = 'kk';
+            document.getElementById('ru-btn').classList.remove('active');
+            document.getElementById('kz-btn').classList.add('active');
+            
+            document.getElementById('logo-text').textContent = kzTexts.logo;
+            document.getElementById('back-text').textContent = kzTexts.back;
+            document.getElementById('module-title').textContent = kzTexts.title;
+            document.getElementById('module-subtitle').textContent = kzTexts.subtitle;
+            
+            document.getElementById('section1-title').textContent = kzTexts.section1;
+            document.getElementById('section1-p1').textContent = kzTexts.section1p1;
+            document.getElementById('important-note1').textContent = kzTexts.note1;
+            document.getElementById('important-note1-text').textContent = kzTexts.note1text;
+            
+            document.getElementById('section2-title').textContent = kzTexts.section2;
+            document.getElementById('section2-p1').textContent = kzTexts.section2p1;
+            
+            const listItems = document.querySelectorAll('#section2-list li');
+            kzTexts.section2list.forEach((text, index) => {
+                if (listItems[index]) {
+                    listItems[index].textContent = text;
+                }
+            });
+            
+            document.getElementById('section3-title').textContent = kzTexts.section3;
+            document.getElementById('section3-p1').textContent = kzTexts.section3p1;
+            
+            document.getElementById('table-header1').textContent = kzTexts.table1h1;
+            document.getElementById('table-header2').textContent = kzTexts.table1h2;
+            document.getElementById('table-header3').textContent = kzTexts.table1h3;
+            
+            const table1Cells = [
+                ['table1-cell1', 'table1-cell2', 'table1-cell3'],
+                ['table2-cell1', 'table2-cell2', 'table2-cell3'],
+                ['table3-cell1', 'table3-cell2', 'table3-cell3'],
+                ['table4-cell1', 'table4-cell2', 'table4-cell3'],
+                ['table5-cell1', 'table5-cell2', 'table5-cell3']
+            ];
+            
+            kzTexts.table1.forEach((row, rowIndex) => {
+                row.forEach((cellText, cellIndex) => {
+                    document.getElementById(table1Cells[rowIndex][cellIndex]).textContent = cellText;
+                });
+            });
+            
+            document.getElementById('section4-title').textContent = kzTexts.section4;
+            document.getElementById('section4-p1').textContent = kzTexts.section4p1;
+            
+            document.getElementById('table2-header1').textContent = kzTexts.table2h1;
+            document.getElementById('table2-header2').textContent = kzTexts.table2h2;
+            document.getElementById('table2-header3').textContent = kzTexts.table2h3;
+            
+            const table2Cells = [
+                ['table2-1-cell1', 'table2-1-cell2', 'table2-1-cell3'],
+                ['table2-2-cell1', 'table2-2-cell2', 'table2-2-cell3'],
+                ['table2-3-cell1', 'table2-3-cell2', 'table2-3-cell3'],
+                ['table2-4-cell1', 'table2-4-cell2', 'table2-4-cell3']
+            ];
+            
+            kzTexts.table2.forEach((row, rowIndex) => {
+                row.forEach((cellText, cellIndex) => {
+                    document.getElementById(table2Cells[rowIndex][cellIndex]).textContent = cellText;
+                });
+            });
+            
+            document.getElementById('prev-btn').textContent = kzTexts.prevBtn;
+            document.getElementById('next-btn').textContent = kzTexts.nextBtn;
+            
+            // Обновление текста кнопок медиа
+            document.getElementById('text-btn-text').textContent = kzTexts.textBtn;
+            document.getElementById('presentation-btn-text').textContent = kzTexts.presentationBtn;
+            document.getElementById('video-btn-text').textContent = kzTexts.videoBtn;
+            
+            // Обновление медиа-контента
+            document.getElementById('presentation-title').textContent = kzTexts.presentationTitle;
+            document.getElementById('video-title').textContent = kzTexts.videoTitle;
+            document.getElementById('video-description').textContent = kzTexts.videoDescription;
+            
+            // Обновление ссылок на медиа
+            document.getElementById('presentation-frame').src = kzTexts.kzPresentation;
+            document.getElementById('video-frame').src = kzTexts.kzVideo;
+            
+            // Обновление тестовой секции
+            document.getElementById('test-title').textContent = kzTexts.testTitle;
+            document.getElementById('test-description').textContent = kzTexts.testDescription;
+            document.getElementById('test-btn-text').textContent = kzTexts.testBtnText;
+            document.getElementById('test-btn').href = kzTexts.testLink;
+        }
+        
+        // Установка русского языка
+        function setRussianLanguage() {
+            document.documentElement.lang = 'ru';
+            document.getElementById('kz-btn').classList.remove('active');
+            document.getElementById('ru-btn').classList.add('active');
+            
+            document.getElementById('logo-text').textContent = ruTexts.logo;
+            document.getElementById('back-text').textContent = ruTexts.back;
+            document.getElementById('module-title').textContent = ruTexts.title;
+            document.getElementById('module-subtitle').textContent = ruTexts.subtitle;
+            
+            document.getElementById('section1-title').textContent = ruTexts.section1;
+            document.getElementById('section1-p1').textContent = ruTexts.section1p1;
+            document.getElementById('important-note1').textContent = ruTexts.note1;
+            document.getElementById('important-note1-text').textContent = ruTexts.note1text;
+            
+            document.getElementById('section2-title').textContent = ruTexts.section2;
+            document.getElementById('section2-p1').textContent = ruTexts.section2p1;
+            
+            const listItems = document.querySelectorAll('#section2-list li');
+            ruTexts.section2list.forEach((text, index) => {
+                if (listItems[index]) {
+                    listItems[index].textContent = text;
+                }
+            });
+            
+            document.getElementById('section3-title').textContent = ruTexts.section3;
+            document.getElementById('section3-p1').textContent = ruTexts.section3p1;
+            
+            document.getElementById('table-header1').textContent = ruTexts.table1h1;
+            document.getElementById('table-header2').textContent = ruTexts.table1h2;
+            document.getElementById('table-header3').textContent = ruTexts.table1h3;
+            
+            const table1Cells = [
+                ['table1-cell1', 'table1-cell2', 'table1-cell3'],
+                ['table2-cell1', 'table2-cell2', 'table2-cell3'],
+                ['table3-cell1', 'table3-cell2', 'table3-cell3'],
+                ['table4-cell1', 'table4-cell2', 'table4-cell3'],
+                ['table5-cell1', 'table5-cell2', 'table5-cell3']
+            ];
+            
+            ruTexts.table1.forEach((row, rowIndex) => {
+                row.forEach((cellText, cellIndex) => {
+                    document.getElementById(table1Cells[rowIndex][cellIndex]).textContent = cellText;
+                });
+            });
+            
+            document.getElementById('section4-title').textContent = ruTexts.section4;
+            document.getElementById('section4-p1').textContent = ruTexts.section4p1;
+            
+            document.getElementById('table2-header1').textContent = ruTexts.table2h1;
+            document.getElementById('table2-header2').textContent = ruTexts.table2h2;
+            document.getElementById('table2-header3').textContent = ruTexts.table2h3;
+            
+            const table2Cells = [
+                ['table2-1-cell1', 'table2-1-cell2', 'table2-1-cell3'],
+                ['table2-2-cell1', 'table2-2-cell2', 'table2-2-cell3'],
+                ['table2-3-cell1', 'table2-3-cell2', 'table2-3-cell3'],
+                ['table2-4-cell1', 'table2-4-cell2', 'table2-4-cell3']
+            ];
+            
+            ruTexts.table2.forEach((row, rowIndex) => {
+                row.forEach((cellText, cellIndex) => {
+                    document.getElementById(table2Cells[rowIndex][cellIndex]).textContent = cellText;
+                });
+            });
+            
+            document.getElementById('prev-btn').textContent = ruTexts.prevBtn;
+            document.getElementById('next-btn').textContent = ruTexts.nextBtn;
+            
+            // Обновление текста кнопок медиа
+            document.getElementById('text-btn-text').textContent = ruTexts.textBtn;
+            document.getElementById('presentation-btn-text').textContent = ruTexts.presentationBtn;
+            document.getElementById('video-btn-text').textContent = ruTexts.videoBtn;
+            
+            // Обновление медиа-контента
+            document.getElementById('presentation-title').textContent = ruTexts.presentationTitle;
+            document.getElementById('video-title').textContent = ruTexts.videoTitle;
+            document.getElementById('video-description').textContent = ruTexts.videoDescription;
+            
+            // Обновление ссылок на медиа
+            document.getElementById('presentation-frame').src = ruTexts.ruPresentation;
+            document.getElementById('video-frame').src = ruTexts.ruVideo;
+            
+            // Обновление тестовой секции
+            document.getElementById('test-title').textContent = ruTexts.testTitle;
+            document.getElementById('test-description').textContent = ruTexts.testDescription;
+            document.getElementById('test-btn-text').textContent = ruTexts.testBtnText;
+            document.getElementById('test-btn').href = ruTexts.testLink;
+        }
+        
+        // Функции для переключения между режимами отображения
+        function showTextContent() {
+            document.querySelectorAll('.media-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelector('.text-content').classList.add('active');
+            
+            document.querySelectorAll('.media-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('text-btn').classList.add('active');
+        }
+        
+        function showPresentationContent() {
+            document.querySelectorAll('.media-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelector('.presentation-content').classList.add('active');
+            
+            document.querySelectorAll('.media-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('presentation-btn').classList.add('active');
+        }
+        
+        function showVideoContent() {
+            document.querySelectorAll('.media-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelector('.video-content').classList.add('active');
+            
+            document.querySelectorAll('.media-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('video-btn').classList.add('active');
+        }
+        
+        // Обработчики кнопок переключения языка
+        document.getElementById('ru-btn').addEventListener('click', setRussianLanguage);
+        document.getElementById('kz-btn').addEventListener('click', setKazakhLanguage);
+        
+        // Обработчики кнопок переключения режимов
+        document.getElementById('text-btn').addEventListener('click', showTextContent);
+        document.getElementById('presentation-btn').addEventListener('click', showPresentationContent);
+        document.getElementById('video-btn').addEventListener('click', showVideoContent);
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            setKazakhLanguage();
+            showTextContent(); // По умолчанию показываем текстовый контент
+        });
+    </script>
+</body>
+</html>

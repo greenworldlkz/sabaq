@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Жасыл әлем - Өсімдіктер биологиясы</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            color: #33691e;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .auth-container {
+            padding: 30px;
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: #4caf50;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #666;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .btn-secondary:hover {
+            background: #eeeeee;
+        }
+        
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .switch-link {
+            color: #4caf50;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .switch-link:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+            text-align: center;
+        }
+        
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+            text-align: center;
+        }
+        
+        .user-info {
+            text-align: center;
+            padding: 20px;
+            background: #f9fbf8;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            background: #4caf50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 15px;
+        }
+        
+        .logout-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .logout-btn:hover {
+            background: #d32f2f;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .settings-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .language-switcher {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 5px;
+            display: flex;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .language-btn {
+            padding: 5px 15px;
+            border: none;
+            background: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .language-btn.active {
+            background: #4caf50;
+            color: white;
+        }
+        
+        /* Новые стили для переключателя устройств */
+        .device-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .device-btn {
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            border-radius: 16px;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .device-btn.active {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .device-btn:hover {
+            background: rgba(76, 175, 80, 0.1);
+        }
+        
+        /* Стили для мобильного вида */
+        body.mobile-view .container {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 10px;
+        }
+        
+        body.mobile-view .header {
+            padding: 20px 15px;
+        }
+        
+        body.mobile-view .logo {
+            font-size: 2rem;
+        }
+        
+        body.mobile-view .title {
+            font-size: 1.5rem;
+        }
+        
+        body.mobile-view .auth-container {
+            padding: 20px 15px;
+        }
+        
+        body.mobile-view .form-input {
+            padding: 10px 12px;
+            font-size: 16px; /* Предотвращает масштабирование в iOS */
+        }
+        
+        body.mobile-view .btn {
+            padding: 12px;
+        }
+        
+        body.mobile-view .settings-container {
+            top: 10px;
+            right: 10px;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                max-width: 100%;
+            }
+            
+            .auth-container {
+                padding: 20px;
+            }
+            
+            /* Для мобильных устройств по умолчанию используем mobile view */
+            body:not(.desktop-view) {
+                padding: 10px;
+            }
+            
+            body:not(.desktop-view) .container {
+                max-width: 100%;
+                border-radius: 10px;
+            }
+        }
+        
+        /* Для очень маленьких экранов */
+        @media (max-width: 350px) {
+            .settings-container {
+                position: relative;
+                top: 0;
+                right: 0;
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-container">
+        <div class="language-switcher">
+            <button class="language-btn active" id="kz-btn">Қаз</button>
+            <button class="language-btn" id="ru-btn">Рус</button>
+        </div>
+        <div class="device-switcher">
+            <button class="device-btn" id="desktop-btn" title="Desktop view">
+                <i class="fas fa-desktop"></i>
+            </button>
+            <button class="device-btn active" id="mobile-btn" title="Mobile view">
+                <i class="fas fa-mobile-alt"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <h1 class="title" id="title">Жасыл әлем</h1>
+            <p class="subtitle" id="subtitle">Өсімдіктер биологиясы</p>
+        </div>
+        
+        <div class="auth-container">
+            <div class="error-message" id="error-message"></div>
+            <div class="success-message" id="success-message"></div>
+            
+            <div class="user-info" id="user-info">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h3 id="welcome-text">Қош келдіңіз, <span id="user-name"></span>!</h3>
+                <p id="user-email"></p>
+                <a href="modules.html" class="btn btn-primary">
+                    <i class="fas fa-play"></i> <span id="start-learning">Оқуды бастау</span>
+                </a>
+                <button class="logout-btn" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> <span id="logout-text">Шығу</span>
+                </button>
+            </div>
+            
+            <div class="auth-form active" id="login-form">
+                <h2 id="login-title">Кіру</h2>
+                <div class="form-group">
+                    <label class="form-label" for="login-email">Электрондық пошта</label>
+                    <input type="email" class="form-input" id="login-email" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="login-password">Құпия сөз</label>
+                    <input type="password" class="form-input" id="login-password" placeholder="Құпия сөзіңіз">
+                </div>
+                <button class="btn btn-primary" id="login-btn">
+                    <i class="fas fa-sign-in-alt"></i> <span id="login-btn-text">Кіру</span>
+                </button>
+                <div class="auth-switch">
+                    <span id="no-account">Аккаунтыңыз жоқ па?</span>
+                    <a class="switch-link" id="switch-to-register">Тіркелу</a>
+                </div>
+            </div>
+            
+            <div class="auth-form" id="register-form">
+                <h2 id="register-title">Тіркелу</h2>
+                <div class="form-group">
+                    <label class="form-label" for="register-name">Аты-жөні</label>
+                    <input type="text" class="form-input" id="register-name" placeholder="Атыңыз">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="register-email">Электрондық пошта</label>
+                    <input type="email" class="form-input" id="register-email" placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="register-password">Құпия сөз</label>
+                    <input type="password" class="form-input" id="register-password" placeholder="Құпия сөз (кемінде 6 символ)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="register-confirm">Құпия сөзді қайталаңыз</label>
+                    <input type="password" class="form-input" id="register-confirm" placeholder="Құпия сөзді қайта енгізіңіз">
+                </div>
+                <button class="btn btn-primary" id="register-btn">
+                    <i class="fas fa-user-plus"></i> <span id="register-btn-text">Тіркелу</span>
+                </button>
+                <div class="auth-switch">
+                    <span id="have-account">Аккаунтыңыз бар ма?</span>
+                    <a class="switch-link" id="switch-to-login">Кіру</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Тексты на казахском
+        const kzTexts = {
+            title: "Жасыл әлем",
+            subtitle: "Өсімдіктер биологиясы",
+            loginTitle: "Кіру",
+            registerTitle: "Тіркелу",
+            loginBtn: "Кіру",
+            registerBtn: "Тіркелу",
+            noAccount: "Аккаунтыңыз жоқ па?",
+            haveAccount: "Аккаунтыңыз бар ма?",
+            switchToRegister: "Тіркелу",
+            switchToLogin: "Кіру",
+            welcome: "Қош келдіңіз,",
+            startLearning: "Оқуды бастау",
+            logout: "Шығу",
+            namePlaceholder: "Атыңыз",
+            emailPlaceholder: "email@example.com",
+            passwordPlaceholder: "Құпия сөзіңіз",
+            confirmPlaceholder: "Құпия сөзді қайта енгізіңіз",
+            passwordLength: "Құпия сөз (кемінде 6 символ)",
+            loginSuccess: "Сәтті кірдіңіз!",
+            registerSuccess: "Тіркелу сәтті аяқталды!",
+            logoutSuccess: "Сіз жүйеден шықтыңыз",
+            fillFields: "Барлық өрістерді толтырыңыз",
+            passwordMismatch: "Құпия сөздер сәйкес келмейді",
+            passwordShort: "Құпия сөз кемінде 6 символ болуы керек",
+            userExists: "Бұл электрондық пошта бойынша пайдаланушы тіркелген",
+            invalidCredentials: "Электрондық пошта немесе құпия сөз қате",
+            desktopView: "Компьютер көрінісі",
+            mobileView: "Телефон көрінісі"
+        };
+        
+        // Тексты на русском
+        const ruTexts = {
+            title: "Зеленый мир",
+            subtitle: "Биология растений",
+            loginTitle: "Вход",
+            registerTitle: "Регистрация",
+            loginBtn: "Войти",
+            registerBtn: "Зарегистрироваться",
+            noAccount: "Нет аккаунта?",
+            haveAccount: "Уже есть аккаунт?",
+            switchToRegister: "Регистрация",
+            switchToLogin: "Вход",
+            welcome: "Добро пожаловать,",
+            startLearning: "Начать обучение",
+            logout: "Выйти",
+            namePlaceholder: "Ваше имя",
+            emailPlaceholder: "email@example.com",
+            passwordPlaceholder: "Ваш пароль",
+            confirmPlaceholder: "Повторите пароль",
+            passwordLength: "Пароль (минимум 6 символов)",
+            loginSuccess: "Успешный вход!",
+            registerSuccess: "Регистрация завершена успешно!",
+            logoutSuccess: "Вы вышли из системы",
+            fillFields: "Заполните все поля",
+            passwordMismatch: "Пароли не совпадают",
+            passwordShort: "Пароль должен быть не менее 6 символов",
+            userExists: "Пользователь с таким email уже зарегистрирован",
+            invalidCredentials: "Неверный email или пароль",
+            desktopView: "Вид для компьютера",
+            mobileView: "Вид для телефона"
+        };
+        
+        // Система переключения между desktop/mobile view
+        function setupDeviceSwitcher() {
+            const desktopBtn = document.getElementById('desktop-btn');
+            const mobileBtn = document.getElementById('mobile-btn');
+            
+            // Загрузить сохраненные настройки
+            const savedView = localStorage.getItem('preferredView') || 'auto';
+            setView(savedView);
+            
+            // Обработчики событий
+            desktopBtn.addEventListener('click', () => setView('desktop'));
+            mobileBtn.addEventListener('click', () => setView('mobile'));
+        }
+        
+        function setView(viewType) {
+            const desktopBtn = document.getElementById('desktop-btn');
+            const mobileBtn = document.getElementById('mobile-btn');
+            const body = document.body;
+            
+            // Сбросить активные классы
+            desktopBtn.classList.remove('active');
+            mobileBtn.classList.remove('active');
+            body.classList.remove('desktop-view', 'mobile-view');
+            
+            // Установить выбранный вид
+            if (viewType === 'mobile') {
+                mobileBtn.classList.add('active');
+                body.classList.add('mobile-view');
+            } else if (viewType === 'desktop') {
+                desktopBtn.classList.add('active');
+                body.classList.add('desktop-view');
+            }
+            
+            // Сохранить настройки
+            localStorage.setItem('preferredView', viewType);
+            
+            // Обновить title кнопок
+            const lang = document.documentElement.lang;
+            desktopBtn.title = lang === 'kk' ? kzTexts.desktopView : ruTexts.desktopView;
+            mobileBtn.title = lang === 'kk' ? kzTexts.mobileView : ruTexts.mobileView;
+        }
+        
+        // Установка казахского языка по умолчанию
+        function setKazakhLanguage() {
+            document.documentElement.lang = 'kk';
+            document.getElementById('ru-btn').classList.remove('active');
+            document.getElementById('kz-btn').classList.add('active');
+            
+            document.getElementById('title').textContent = kzTexts.title;
+            document.getElementById('subtitle').textContent = kzTexts.subtitle;
+            document.getElementById('login-title').textContent = kzTexts.loginTitle;
+            document.getElementById('register-title').textContent = kzTexts.registerTitle;
+            document.getElementById('login-btn-text').textContent = kzTexts.loginBtn;
+            document.getElementById('register-btn-text').textContent = kzTexts.registerBtn;
+            document.getElementById('no-account').textContent = kzTexts.noAccount;
+            document.getElementById('have-account').textContent = kzTexts.haveAccount;
+            document.getElementById('switch-to-register').textContent = kzTexts.switchToRegister;
+            document.getElementById('switch-to-login').textContent = kzTexts.switchToLogin;
+            document.getElementById('start-learning').textContent = kzTexts.startLearning;
+            document.getElementById('logout-text').textContent = kzTexts.logout;
+            
+            document.getElementById('register-name').placeholder = kzTexts.namePlaceholder;
+            document.getElementById('login-email').placeholder = kzTexts.emailPlaceholder;
+            document.getElementById('register-email').placeholder = kzTexts.emailPlaceholder;
+            document.getElementById('login-password').placeholder = kzTexts.passwordPlaceholder;
+            document.getElementById('register-password').placeholder = kzTexts.passwordLength;
+            document.getElementById('register-confirm').placeholder = kzTexts.confirmPlaceholder;
+            
+            // Обновить title кнопок устройств
+            document.getElementById('desktop-btn').title = kzTexts.desktopView;
+            document.getElementById('mobile-btn').title = kzTexts.mobileView;
+        }
+        
+        // Установка русского языка
+        function setRussianLanguage() {
+            document.documentElement.lang = 'ru';
+            document.getElementById('kz-btn').classList.remove('active');
+            document.getElementById('ru-btn').classList.add('active');
+            
+            document.getElementById('title').textContent = ruTexts.title;
+            document.getElementById('subtitle').textContent = ruTexts.subtitle;
+            document.getElementById('login-title').textContent = ruTexts.loginTitle;
+            document.getElementById('register-title').textContent = ruTexts.registerTitle;
+            document.getElementById('login-btn-text').textContent = ruTexts.loginBtn;
+            document.getElementById('register-btn-text').textContent = ruTexts.registerBtn;
+            document.getElementById('no-account').textContent = ruTexts.noAccount;
+            document.getElementById('have-account').textContent = ruTexts.haveAccount;
+            document.getElementById('switch-to-register').textContent = ruTexts.switchToRegister;
+            document.getElementById('switch-to-login').textContent = ruTexts.switchToLogin;
+            document.getElementById('start-learning').textContent = ruTexts.startLearning;
+            document.getElementById('logout-text').textContent = ruTexts.logout;
+            
+            document.getElementById('register-name').placeholder = ruTexts.namePlaceholder;
+            document.getElementById('login-email').placeholder = ruTexts.emailPlaceholder;
+            document.getElementById('register-email').placeholder = ruTexts.emailPlaceholder;
+            document.getElementById('login-password').placeholder = ruTexts.passwordPlaceholder;
+            document.getElementById('register-password').placeholder = ruTexts.passwordLength;
+            document.getElementById('register-confirm').placeholder = ruTexts.confirmPlaceholder;
+            
+            // Обновить title кнопок устройств
+            document.getElementById('desktop-btn').title = ruTexts.desktopView;
+            document.getElementById('mobile-btn').title = ruTexts.mobileView;
+        }
+        
+        // Функции для работы с пользователями
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('plantBiologyUsers')) || [];
+        }
+        
+        function saveUsers(users) {
+            localStorage.setItem('plantBiologyUsers', JSON.stringify(users));
+        }
+        
+        function getCurrentUser() {
+            return JSON.parse(localStorage.getItem('currentUser'));
+        }
+        
+        function setCurrentUser(user) {
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        }
+        
+        function clearCurrentUser() {
+            localStorage.removeItem('currentUser');
+        }
+        
+        function showError(message) {
+            const errorElement = document.getElementById('error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            // Скрыть через 5 секунд
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+        
+        function showSuccess(message) {
+            const successElement = document.getElementById('success-message');
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+            
+            // Скрыть через 3 секунд
+            setTimeout(() => {
+                successElement.style.display = 'none';
+            }, 3000);
+        }
+        
+        function switchToRegister() {
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.add('active');
+        }
+        
+        function switchToLogin() {
+            document.getElementById('register-form').classList.remove('active');
+            document.getElementById('login-form').classList.add('active');
+        }
+        
+        function registerUser() {
+            const name = document.getElementById('register-name').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm').value;
+            
+            // Проверка заполнения полей
+            if (!name || !email || !password || !confirmPassword) {
+                const lang = document.documentElement.lang;
+                showError(lang === 'kk' ? kzTexts.fillFields : ruTexts.fillFields);
+                return;
+            }
+            
+            // Проверка длины пароля
+            if (password.length < 6) {
+                const lang = document.documentElement.lang;
+                showError(lang === 'kk' ? kzTexts.passwordShort : ruTexts.passwordShort);
+                return;
+            }
+            
+            // Проверка совпадения паролей
+            if (password !== confirmPassword) {
+                const lang = document.documentElement.lang;
+                showError(lang === 'kk' ? kzTexts.passwordMismatch : ruTexts.passwordMismatch);
+                return;
+            }
+            
+            // Проверка существования пользователя
+            const users = getUsers();
+            const existingUser = users.find(user => user.email === email);
+            if (existingUser) {
+                const lang = document.documentElement.lang;
+                showError(lang === 'kk' ? kzTexts.userExists : ruTexts.userExists);
+                return;
+            }
+            
+            // Создание нового пользователя
+            const newUser = {
+                id: Date.now().toString(),
+                name: name,
+                email: email,
+                password: password, // В реальном приложении пароль должен быть хеширован!
+                progress: {},
+                registrationDate: new Date().toISOString()
+            };
+            
+            users.push(newUser);
+            saveUsers(users);
+            
+            // Автоматический вход после регистрации
+            setCurrentUser(newUser);
+            showUserInfo(newUser);
+            
+            const lang = document.documentElement.lang;
+            showSuccess(lang === 'kk' ? kzTexts.registerSuccess : ruTexts.registerSuccess);
+        }
+        
+        function loginUser() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value;
+            
+            // Проверка заполнения полей
+            if (!email || !password) {
+                const lang = document.documentElement.lang;
+                showError(lang === 'kk' ? kzTexts.fillFields : ruTexts.fillFields);
+                return;
+            }
+            
+            // Поиск пользователя
+            const users = getUsers();
+            const user = users.find(u => u.email === email && u.password === password);
+            
+            if (user) {
+                setCurrentUser(user);
+                showUserInfo(user);
+                
+                const lang = document.documentElement.lang;
+                showSuccess(lang === 'kk' ? kzTexts.loginSuccess : ruTexts.loginSuccess);
+            } else {
+                const lang = document.documentElement.lang;
+                showError(lang === 'kk' ? kzTexts.invalidCredentials : ruTexts.invalidCredentials);
+            }
+        }
+        
+        function logoutUser() {
+            clearCurrentUser();
+            hideUserInfo();
+            
+            const lang = document.documentElement.lang;
+            showSuccess(lang === 'kk' ? kzTexts.logoutSuccess : ruTexts.logoutSuccess);
+        }
+        
+        function showUserInfo(user) {
+            document.getElementById('user-name').textContent = user.name;
+            document.getElementById('user-email').textContent = user.email;
+            
+            const lang = document.documentElement.lang;
+            document.getElementById('welcome-text').innerHTML = 
+                (lang === 'kk' ? kzTexts.welcome : ruTexts.welcome) + ` <span id="user-name">${user.name}</span>!`;
+            
+            document.getElementById('user-info').style.display = 'block';
+            document.getElementById('login-form').classList.remove('active');
+            document.getElementById('register-form').classList.remove('active');
+        }
+        
+        function hideUserInfo() {
+            document.getElementById('user-info').style.display = 'none';
+            document.getElementById('login-form').classList.add('active');
+            
+            // Очистка полей форм
+            document.getElementById('login-email').value = '';
+            document.getElementById('login-password').value = '';
+            document.getElementById('register-name').value = '';
+            document.getElementById('register-email').value = '';
+            document.getElementById('register-password').value = '';
+            document.getElementById('register-confirm').value = '';
+        }
+        
+        // Инициализация при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            setKazakhLanguage();
+            
+            // Настройка переключателя устройств
+            setupDeviceSwitcher();
+            
+            // Проверка авторизованного пользователя
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                showUserInfo(currentUser);
+            }
+            
+            // Обработчики событий
+            document.getElementById('kz-btn').addEventListener('click', setKazakhLanguage);
+            document.getElementById('ru-btn').addEventListener('click', setRussianLanguage);
+            document.getElementById('switch-to-register').addEventListener('click', switchToRegister);
+            document.getElementById('switch-to-login').addEventListener('click', switchToLogin);
+            document.getElementById('register-btn').addEventListener('click', registerUser);
+            document.getElementById('login-btn').addEventListener('click', loginUser);
+            document.getElementById('logout-btn').addEventListener('click', logoutUser);
+            
+            // Ввод по Enter
+            document.getElementById('register-form').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    registerUser();
+                }
+            });
+            
+            document.getElementById('login-form').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    loginUser();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
