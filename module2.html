@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="kk">
 <head>
     <meta charset="UTF-8">
@@ -766,6 +766,12 @@
                     <p id="video-description" style="margin-top: 15px; color: #666; font-style: italic;">
                         Бұл бейне сабақта төменгі және жоғары сатыдағы өсімдіктердің ерекшеліктері мен айырмашылықтары қарастырылады.
                     </p>
+                    <div style="margin-top: 15px;">
+                        <a href="https://youtu.be/dJ2kI8h8Cr0" target="_blank" style="color: #4caf50; text-decoration: none; font-weight: 500;">
+                            <i class="fas fa-external-link-alt"></i> 
+                            <span id="video-direct-link">Егер видео жүктелмесе, YouTube-та қарау үшін осы жерді басыңыз</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             
@@ -834,6 +840,7 @@
             presentationTitle: "Төменгі және жоғары сатыдағы өсімдіктер презентациясы",
             videoTitle: "Төменгі және жоғары сатыдағы өсімдіктер бойынша видео сабақ",
             videoDescription: "Бұл бейне сабақта төменгі және жоғары сатыдағы өсімдіктердің ерекшеліктері мен айырмашылықтары қарастырылады.",
+            videoDirectLink: "Егер видео жүктелмесе, YouTube-та қарау үшін осы жерді басыңыз",
             kzPresentation: "https://docs.google.com/presentation/d/1oU0bYyFycrIh03xVYWlFpvCavSWxFTFetxk8Pkudk6s/embed?start=false&loop=false&delayms=3000",
             ruPresentation: "https://docs.google.com/presentation/d/1NIhYXwR7p999qUtJAZXIv2Xp5Vjw5ux4-cP2wwXKP00/embed?start=false&loop=false&delayms=3000",
             kzVideo: "https://www.youtube.com/embed/dJ2kI8h8Cr0",
@@ -894,6 +901,7 @@
             presentationTitle: "Презентация по низшим и высшим растениям",
             videoTitle: "Видеоурок по низшим и высшим растениям",
             videoDescription: "В этом видеоуроке рассматриваются особенности и различия низших и высших растений.",
+            videoDirectLink: "Если видео не загружается, нажмите здесь для просмотра на YouTube",
             kzPresentation: "https://docs.google.com/presentation/d/1oU0bYyFycrIh03xVYWlFpvCavSWxFTFetxk8Pkudk6s/embed?start=false&loop=false&delayms=3000",
             ruPresentation: "https://docs.google.com/presentation/d/1NIhYXwR7p999qUtJAZXIv2Xp5Vjw5ux4-cP2wwXKP00/embed?start=false&loop=false&delayms=3000",
             kzVideo: "https://www.youtube.com/embed/dJ2kI8h8Cr0",
@@ -984,6 +992,7 @@
             document.getElementById('presentation-title').textContent = kzTexts.presentationTitle;
             document.getElementById('video-title').textContent = kzTexts.videoTitle;
             document.getElementById('video-description').textContent = kzTexts.videoDescription;
+            document.getElementById('video-direct-link').textContent = kzTexts.videoDirectLink;
             
             // Обновление ссылок на медиа
             document.getElementById('presentation-frame').src = kzTexts.kzPresentation;
@@ -1075,6 +1084,7 @@
             document.getElementById('presentation-title').textContent = ruTexts.presentationTitle;
             document.getElementById('video-title').textContent = ruTexts.videoTitle;
             document.getElementById('video-description').textContent = ruTexts.videoDescription;
+            document.getElementById('video-direct-link').textContent = ruTexts.videoDirectLink;
             
             // Обновление ссылок на медиа
             document.getElementById('presentation-frame').src = ruTexts.ruPresentation;
